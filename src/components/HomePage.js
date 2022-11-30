@@ -18,7 +18,7 @@ import logo from "../images/holybible_logo.png";
 
 export function HomePage({ user }) {
   if (!user) {
-    return <Navigate to="login" />;
+    return <Navigate to="psalm-of-the-day" />;
   }
 
   return (
@@ -68,7 +68,7 @@ export function HomePage({ user }) {
                 text="Favourites"
               />
               <NavBarTab
-                linkToPage="login"
+                linkToPage="psalm-of-the-day"
                 icon={<LogoutOutlinedIcon sx={{ color: "white" }} />}
                 text="Logout"
                 logout="1"

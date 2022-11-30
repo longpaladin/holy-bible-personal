@@ -10,6 +10,7 @@ import { HomePage } from "./components/HomePage";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import { BibleBooks } from "./components/BibleBooks";
+import { PsalmOfTheDay } from "./components/PsalmOfTheDay";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -26,6 +27,7 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<AuthPage user={user} />}>
+            <Route path="psalm-of-the-day" element={<PsalmOfTheDay />} />
             <Route path="newuser" element={<NewUserForm user={user} />} />
             <Route path="login" element={<LoginForm user={user} />} />
           </Route>

@@ -16,8 +16,8 @@ import logo from "../images/holybible_logo.png"
 
 export function AuthPage({ user }) {
   if (user){
-    return <Navigate to="studybybooks" />
-  }
+    return <Navigate to="readthebible" />
+  } 
   
   return (
     <Box sx={{ display: "flex", flexDirection: "row" }}>

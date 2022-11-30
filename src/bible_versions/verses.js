@@ -486,7 +486,7 @@ export const versesCount = {
     "34",
     "17",
   ],
-  "Psalm": [
+  "Psalms": [
     "6",
     "12",
     "8",
