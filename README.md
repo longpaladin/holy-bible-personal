@@ -68,3 +68,30 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+Done:
+install router
+install axios ???need???
+install bible parser - to uninstall
+install biblejs (davewasmer)- to uninstall
+install holy-bible (bricejlin)
+install firebase
+create firebase project
+create realtime database (favourite verses)
+create storage (for photos), resized
+firebase auth
+
+
+Things to do:
+
+skeleton
+spinners
+click card to navigate to readthebible page
+firebase push (unique ID for each user)
+
+
+use API in project
+
+refactor code
+text field validation + error messages
