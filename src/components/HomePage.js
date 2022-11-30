@@ -3,10 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import {
-  List,
-} from "@mui/material";
-
+import { List } from "@mui/material";
 
 import { Navigate, Outlet } from "react-router-dom";
 import { NavBarTab } from "./NavBarTab";
@@ -15,6 +12,7 @@ import CollectionsBookmarkOutlinedIcon from "@mui/icons-material/CollectionsBook
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import logo from "../images/holybible_logo.png";
+import { LogoutTab } from "./LogoutTab";
 
 export function HomePage({ user }) {
   if (!user) {
@@ -43,11 +41,7 @@ export function HomePage({ user }) {
               aria-label="menu"
               sx={{ m: 0, p: 0 }}
             >
-              <Box
-                component="img"
-                src={logo}
-                sx={{ maxWidth: "100%" }}
-              />
+              <Box component="img" src={logo} sx={{ maxWidth: "100%" }} />
             </IconButton>
             <List sx={{ width: "100%" }}>
               <NavBarTab
@@ -67,12 +61,7 @@ export function HomePage({ user }) {
                 icon={<ThumbUpIcon sx={{ color: "white" }} />}
                 text="Favourites"
               />
-              <NavBarTab
-                linkToPage="psalm-of-the-day"
-                icon={<LogoutOutlinedIcon sx={{ color: "white" }} />}
-                text="Logout"
-                logout="1"
-              />
+              <LogoutTab />
             </List>
           </Toolbar>
         </AppBar>
