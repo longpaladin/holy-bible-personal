@@ -39,26 +39,27 @@ export function DisplayVerses() {
   const fetchVerses = useCallback(async () => {
     if (!book || !chapter || !version) return;
     const newPrintText = [];
-    if (verse) {
-      const { text } = await bible.get(`${book}.${chapter}.${verse}`, version);
+    if (verse) { // if there is a verse in the search
+      const { text } = await bible.get(`${book}.${chapter}.${verse}`, version); // search bible by book with chapter and verse
       newPrintText.push(formatVerse(verse,text));
-    } else {
-      const verseCount = computeVerseCount(book, chapter);
-      const verses = await Promise.all(new Array(verseCount)
-        .fill(null)
-        .map(async (_, index) => {
-          const { text } = await bible.get(`${book}.${chapter}.${index + 1}`, version);
+    } else { // otherwise
+      const verseCount = computeVerseCount(book, chapter); // calculate the number of verses for this book and chapter
+      const verses = await Promise.all(new Array(verseCount) // create an empty array with length equal to verse count
+        .fill(null) // fill it up with nulls so we can call .map on the array
+        .map(async (_, index) => { // for each element of the array
+          const { text } = await bible.get(`${book}.${chapter}.${index + 1}`, version); // search bible by book with chapter and verse
           return text;
         })
       );
       verses.forEach((verse, index) => newPrintText.push(formatVerse(index + 1, verse)));
     }
     setPrintText(newPrintText);
-  }, [book, chapter, verse, version]);
+  }, [book, chapter, verse, version]); // listen to changes in book, chapter, verse and version
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const [book, chapter, verse] = input.split('.');
+    // setting the book, chapter and verse causes fetchVerses to fire again, 
     setBook(book);
     setChapter(chapter);
     setVerse(verse);
