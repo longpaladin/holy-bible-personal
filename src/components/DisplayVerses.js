@@ -59,7 +59,7 @@ export function DisplayVerses() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const [book, chapter, verse] = input.split('.');
-    // setting the book, chapter and verse causes fetchVerses to fire again, 
+    // setting the book, chapter and verse causes fetchVerses to re-render, so the use effect below fetches verses again
     setBook(book);
     setChapter(chapter);
     setVerse(verse);
