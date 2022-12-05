@@ -12,10 +12,12 @@ import { auth } from "./firebase";
 import { BibleBooks } from "./components/BibleBooks";
 import { PsalmOfTheDay } from "./components/PsalmOfTheDay";
 import { Favourites } from "./components/Favourites";
+import BibleBook from "./components/BibleBook";
 
 export default function App() {
+  const [displayCards, setDisplayCards] = useState(true);
   const [user, setUser] = useState(null);
-  console.log(user)
+  console.log(user);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       // console.log(user)
@@ -26,22 +28,44 @@ export default function App() {
   return (
     <>
       <BrowserRouter>
+        {/* Before login */}
         <Routes>
           <Route path="/" element={<AuthPage user={user} />}>
             <Route path="psalm-of-the-day" element={<PsalmOfTheDay />} />
             <Route path="newuser" element={<NewUserForm user={user} />} />
             <Route path="login" element={<LoginForm user={user} />} />
           </Route>
-          <Route>
-            <Route element={<HomePage user={user} />}>
+
+          {/* After login */}
+          <Route element={<HomePage user={user} />}>
+            <Route
+              path="readthebible"
+              element={<DisplayVerses user={user} />}
+            />
+            <Route
+              path="studybybooks"
+              element={
+                <BibleBooks
+                  user={user}
+                  displayCards={displayCards}
+                  setDisplayCards={setDisplayCards}
+                />
+              }
+            >
               <Route
-                path="readthebible"
-                element={<DisplayVerses user={user} />}
+                path=":bookname"
+                element={
+                  <BibleBook
+                    user={user}
+                    setDisplayCards={setDisplayCards}
+                  />
+                }
               />
-              <Route path="studybybooks" element={<BibleBooks user={user} />} />
-              <Route path="favourites" element={<Favourites />} />
             </Route>
+            <Route path="favourites" element={<Favourites />} />
           </Route>
+
+          {/* When all paths fail */}
           <Route
             path="*"
             element={

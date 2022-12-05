@@ -20,7 +20,7 @@ export function Favourites(){
 
   return (
     <div>
-      <h1 style={{ padding: "30px" }}>Your favourite verses</h1>
+      <h2 style={{ padding: "30px" }}>Your favourite verses</h2>
       <Paper
         elevation={6}
         sx={{
@@ -32,9 +32,9 @@ export function Favourites(){
       >
         {verses.map((favourite, index) => (
           <>
-            <h1>
+            <h3>
               {favourite.book} {favourite.chapter}
-            </h1>
+            </h3>
             <Divider />
             <p
               style={{

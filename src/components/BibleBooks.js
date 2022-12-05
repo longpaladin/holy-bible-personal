@@ -1,11 +1,11 @@
+import { Paper } from "@mui/material";
 import { ref, listAll } from "firebase/storage";
 import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { storage } from "../firebase";
 import { CardsDisplay } from "./CardsDisplay";
 
-export function BibleBooks({ user }) {
-
+export function BibleBooks({ displayCards, setDisplayCards }) {
   const [filesFromStorage, setFilesFromStorage] = useState([]);
 
   useEffect(() => {
@@ -25,13 +25,33 @@ export function BibleBooks({ user }) {
   }
 
   return (
-    <div>
-      <h1 style={{ padding: "20px" }}>Learn more about each book</h1>
-      {filesFromStorage.map((file, index) => (
-        <div key={index} style={{ float: "left", padding: "10px" }}>
-          <CardsDisplay picture={file} />
-        </div>
-      ))}
+    <div style={{ minWidth: "80vw", minHeight: "100vh" }}>
+      <h2 style={{ padding: "30px" }}>Learn more about each book</h2>
+      {displayCards && (
+        <Paper
+        elevation={6}
+        sx={{
+          m: 3,
+          maxHeight: "80vh",
+          overflow: "auto",
+          p: 4,
+        }}
+      ><p>Source: Photos from Unsplash by Sincerely Media</p>
+        {filesFromStorage.map((file, index) => (
+          <div key={index}>
+            <CardsDisplay
+              picture={file}
+              setDisplayCards={setDisplayCards}
+            />
+          </div>
+        ))}
+        
+      </Paper>
+      
+      )}
+      
+
+      <Outlet />
     </div>
   );
 }

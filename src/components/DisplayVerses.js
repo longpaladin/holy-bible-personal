@@ -90,7 +90,7 @@ export function DisplayVerses() {
       <Box
         component="form"
         sx={{
-          "& > :not(style)": { m: 3, width: "40ch" },
+          "& > :not(style)": { m: 3, width: "45ch" },
         }}
         noValidate
         autoComplete="off"
@@ -137,14 +137,14 @@ export function DisplayVerses() {
         elevation={6}
         sx={{
           m: 3,
-          maxHeight: "70vh",
+          maxHeight: "65vh",
           overflow: "auto",
           p: 4,
         }}
       >
-        <h1>
+        <h3>
           {book} {chapter}
-        </h1>
+        </h3>
         <Divider />
         {printText.map((text, index) => (
           <EachVerse key={index} text={text} index={index} book={book} chapter={chapter} verse={verse}/>
