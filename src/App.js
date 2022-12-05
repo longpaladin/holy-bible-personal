@@ -11,6 +11,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import { BibleBooks } from "./components/BibleBooks";
 import { PsalmOfTheDay } from "./components/PsalmOfTheDay";
+import { Favourites } from "./components/Favourites";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -38,6 +39,7 @@ export default function App() {
                 element={<DisplayVerses user={user} />}
               />
               <Route path="studybybooks" element={<BibleBooks user={user} />} />
+              <Route path="favourites" element={<Favourites />} />
             </Route>
           </Route>
           <Route

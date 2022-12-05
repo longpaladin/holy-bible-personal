@@ -1,9 +1,10 @@
-import { getDatabase } from "firebase/database";
+import { getDatabase, push, query, ref, set } from "firebase/database";
 import { getStorage } from "firebase/storage";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+
 
 // TODO: Replace with your app's Firebase project configuration
 const firebaseConfig = {
@@ -21,3 +22,16 @@ export const app = initializeApp(firebaseConfig);
 export const database = getDatabase(app);
 export const storage = getStorage();
 export const auth = getAuth(app);
+
+export function favouriteVerses(info) {
+  const myUserId = auth.currentUser.uid;
+  const favouritesListRef = ref(database, 'favourites/' + myUserId);
+  const newFavouriteVerses = push(favouritesListRef);
+  return set(newFavouriteVerses, info);
+}
+
+export function retrieveFavouriteVerses(){
+    const myUserId = auth.currentUser.uid;
+    const result = ref(database, 'favourites/' + myUserId);
+    return result;
+}

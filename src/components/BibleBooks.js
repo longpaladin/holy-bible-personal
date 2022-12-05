@@ -26,6 +26,7 @@ export function BibleBooks({ user }) {
 
   return (
     <div>
+      <h1 style={{ padding: "20px" }}>Learn more about each book</h1>
       {filesFromStorage.map((file, index) => (
         <div key={index} style={{ float: "left", padding: "10px" }}>
           <CardsDisplay picture={file} />

@@ -80,18 +80,27 @@ install firebase
 create firebase project
 create realtime database (favourite verses)
 create storage (for photos), resized
-firebase auth
+firebase auth - login and logout smoothly
+psalm of the day
+firebase push (unique ID for each user), to favourite verses
+
+
+
 
 
 Things to do:
 
-skeleton
+skeleton - when loading verses
 spinners
-click card to navigate to readthebible page
-firebase push (unique ID for each user)
+click card to navigate to studying pages, with dummy fixed content
+fix invalid search input
+animation for clicking on verse to save as favourite
+fix duplicates in favourites
+add delete button to favourites
 
+use API in project???
 
-use API in project
-
+UI/UX
 refactor code
 text field validation + error messages
+learn figma
