@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 import { retrieveFavouriteVerses } from "../firebase";
 
 
-export function Favourites(){
+export function Favourites({setDisplayCards}){
   const [verses, setVerses] = useState([]);
 
   useEffect(() => {
+    setDisplayCards(true);
     onValue(retrieveFavouriteVerses(), (snapshot) => {
       const newMessages = [];
       

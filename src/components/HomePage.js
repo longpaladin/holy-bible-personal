@@ -10,7 +10,6 @@ import { NavBarTab } from "./NavBarTab";
 import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
 import CollectionsBookmarkOutlinedIcon from "@mui/icons-material/CollectionsBookmarkOutlined";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import logo from "../images/holybible_logo.png";
 import { LogoutTab } from "./LogoutTab";
 

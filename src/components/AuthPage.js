@@ -8,10 +8,8 @@ import {
 } from "@mui/material";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import PersonIcon from "@mui/icons-material/Person";
-import { Link, Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { NavBarTab } from "./NavBarTab";
-import { getAuth } from "firebase/auth";
-import { auth } from "../firebase";
 import logo from "../images/holybible_logo.png"
 
 export function AuthPage({ user }) {

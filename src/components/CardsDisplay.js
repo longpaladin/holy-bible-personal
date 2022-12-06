@@ -3,11 +3,9 @@ import { useEffect, useState } from "react";
 import { storage } from "../firebase";
 import * as React from "react";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import { CardActionArea, Paper } from "@mui/material";
-import { Link, Navigate } from "react-router-dom";
+import { CardActionArea } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export function CardsDisplay({ picture, setDisplayCards }) {
   const imageRef = ref(storage, picture);
@@ -26,7 +24,13 @@ export function CardsDisplay({ picture, setDisplayCards }) {
       finalName = finalName[0].toUpperCase() + finalName.slice(1);
       finalName = firstNumber + " " + finalName;
     }
-    setBookName(finalName);
+
+    // Solve the bug of songofsongs from photo name not handled properly
+    if (finalName === "Songofsongs") {
+      setBookName("Song of Songs");
+    } else {
+      setBookName(finalName);
+    }
 
     getDownloadURL(imageRef)
       .then((url) => {
@@ -39,15 +43,15 @@ export function CardsDisplay({ picture, setDisplayCards }) {
 
   return (
     <>
-        <div style={{ float: "left", padding: "10px" }}>
-          <Link to={`${bookName}`} onClick={() => setDisplayCards(false)}>
+      <div style={{ float: "left", padding: "10px" }}>
+        <Link to={`${bookName}`} onClick={() => setDisplayCards(false)}>
           <Card sx={{ maxWidth: 180 }}>
             <CardActionArea>
               <CardMedia component="img" height="120" src={urlName} />
             </CardActionArea>
           </Card>{" "}
         </Link>
-        </div>       
+      </div>
     </>
   );
 }

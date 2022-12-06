@@ -105,7 +105,7 @@ const bibleBooksSummary = [
       "The Book of Ecclesiastes is in the Bible's Old Testament. We do not know who wrote Ecclesiastes. Many people think that the author of Ecclesiastes was King Solomon. However, in the book, the author simply calls himself 'The Teacher'. Solomon was very wise. But he did not know the purpose of his own life. He discovered that pleasure achieved nothing. He realised that even a wise man would die like a fool. And he did not know the purpose of work (Ecclesiastes 2). He even saw that money has no real value (Ecclesiastes 5). Solomon did know that rulers should be fair (Ecclesiastes 8). And everybody must respect God (Ecclesiastes 5). And he believed that wisdom is good (Ecclesiastes 9:13-18). Solomon warned that everybody will die (Ecclesiastes 12). So, we must respect God now. We should not delay.",
   },
   {
-    book: "Songofsongs",
+    book: "Song of Songs",
     summary:
       "The Song of Songs is also called the Song of Solomon. This book is a beautiful love poem. It is in the Bible's Old Testament. The Song of Solomon is the story of the king and the woman that he loves. So, he asks her to marry him. But she hesitates. And he encourages her. In the end, they marry. They are glad to be together. They love each other deeply. The Song of Solomon teaches us that God loves his people. Elsewhere, the Bible describes Christians as 'the bride of Christ' (2 Corinthians 11:2).",
   },

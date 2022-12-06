@@ -1,0 +1,15 @@
+.overlay {
+  width: 100%;
+  min-height: 20px;
+  background-color: #385779;
+  border-radius: 15px;
+}
+
+.modalRight {
+  float: right;
+}
+
+.modalContainer {
+  padding: 10px;
+  color: white;
+}

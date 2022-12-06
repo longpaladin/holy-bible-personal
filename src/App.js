@@ -20,7 +20,6 @@ export default function App() {
   console.log(user);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      // console.log(user)
       setUser(user);
     });
   }, [user]);
@@ -40,7 +39,9 @@ export default function App() {
           <Route element={<HomePage user={user} />}>
             <Route
               path="readthebible"
-              element={<DisplayVerses user={user} />}
+              element={
+                <DisplayVerses user={user} setDisplayCards={setDisplayCards} />
+              }
             />
             <Route
               path="studybybooks"
@@ -55,14 +56,14 @@ export default function App() {
               <Route
                 path=":bookname"
                 element={
-                  <BibleBook
-                    user={user}
-                    setDisplayCards={setDisplayCards}
-                  />
+                  <BibleBook user={user} setDisplayCards={setDisplayCards} />
                 }
               />
             </Route>
-            <Route path="favourites" element={<Favourites />} />
+            <Route
+              path="favourites"
+              element={<Favourites setDisplayCards={setDisplayCards} />}
+            />
           </Route>
 
           {/* When all paths fail */}

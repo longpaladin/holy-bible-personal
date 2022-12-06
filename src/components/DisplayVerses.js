@@ -27,13 +27,14 @@ import { EachVerse } from "./EachVerse";
 // let bcv_parser = require("bible-passage-reference-parser/js/en_bcv_parser").bcv_parser;
 // let bcv = new bcv_parser;
 
-export function DisplayVerses() {
+export function DisplayVerses({setDisplayCards}) {
   const [version, setVersion] = useState("KJV");
   const [book, setBook] = useState("Genesis");
   const [chapter, setChapter] = useState(1);
   const [verse, setVerse] = useState(null);
   const [printText, setPrintText] = useState([]);
   const [input, setInput] = useState("");
+  const [typo, setTypo] = useState(false);
 
   const formatVerse = (verseNumber, text) => `${verseNumber} ${text}`;
 
@@ -78,7 +79,16 @@ export function DisplayVerses() {
       : 0;
   };
 
+  const checkTypo = () => {
+    if(input === input.toLowerCase()){
+      setTypo(true);
+    } else {
+      setTypo(false);
+    }
+  }
+
   useEffect(() => {
+    setDisplayCards(true);
     fetchVerses();
   }, [fetchVerses]);
 
@@ -97,13 +107,17 @@ export function DisplayVerses() {
         onSubmit={handleSubmit}
       >
         <TextField
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => {
+            setInput(e.target.value);
+            checkTypo();
+          }}
           size="small"
           id="outlined-basic"
           label="Search"
           variant="outlined"
-          helperText="Search in this format: 1 John.3 (book & chapter) 1 John.3.1 (book & chapter & verse)"
+          helperText="Search in this format: 1 John.3 (book.chapter), or 1 John.3.1 (book.chapter.verse)"
         />
+        {typo && <p style={{color: "red", fontSize: "12px", margin: "0", paddingLeft: "40px", width: "100%"}}>Ensure that you follow the format strictly without typos!</p>}
         <FormControl>
           <InputLabel id="demo-simple-select-label">Bible version</InputLabel>
           <Select
@@ -142,7 +156,7 @@ export function DisplayVerses() {
           p: 4,
         }}
       >
-        <h3>
+        <h3 style={{textTransform: "capitalize"}}>
           {book} {chapter}
         </h3>
         <Divider />

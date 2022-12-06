@@ -1,7 +1,7 @@
 import { Paper } from "@mui/material";
 import { ref, listAll } from "firebase/storage";
 import { useEffect, useState } from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { storage } from "../firebase";
 import { CardsDisplay } from "./CardsDisplay";
 
