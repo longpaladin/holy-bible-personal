@@ -9,11 +9,13 @@ import {
   Tooltip,
 } from "@mui/material";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
-import {auth} from "../firebase"
+import {auth} from "../firebase";
+import CircularProgress from "@mui/material/CircularProgress";
 
-export function NewUserForm({ user }) {
+export function NewUserForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   function createUser(e, email, password) {
     e.preventDefault();
@@ -44,7 +46,10 @@ export function NewUserForm({ user }) {
           }}
           noValidate
           autoComplete="off"
-          onSubmit={(e) => createUser(e, email, password)}
+          onSubmit={(e) => {
+            createUser(e, email, password);
+            setIsLoading(true);
+          }}
         >
           <TextField
             onChange={(e) => setEmail(e.target.value)}
@@ -75,8 +80,13 @@ export function NewUserForm({ user }) {
                 backgroundColor: "#283e56",
                 "&:hover": { backgroundColor: "#385779" },
               }}
+              disabled={isLoading}
             >
-              <LoginOutlinedIcon sx={{ color: "white" }} />
+              {isLoading ? (
+                <CircularProgress />
+              ) : (
+                <LoginOutlinedIcon sx={{ color: "white" }} />
+              )}
             </Button>
           </Tooltip>
         </Box>

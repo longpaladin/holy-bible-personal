@@ -83,24 +83,19 @@ create storage (for photos), resized
 firebase auth - login and logout smoothly
 psalm of the day
 firebase push (unique ID for each user), to favourite verses
-
-
-
+click card to navigate to studying pages, with dummy fixed content
+fix invalid search input
+snackbar animation for clicking on verse to save as favourite
 
 
 Things to do:
 
 skeleton - when loading verses
 spinners
-click card to navigate to studying pages, with dummy fixed content
-fix invalid search input
-animation for clicking on verse to save as favourite
+
 fix duplicates in favourites
 add delete button to favourites
 
-use API in project???
 
-UI/UX
 refactor code
-text field validation + error messages
 learn figma

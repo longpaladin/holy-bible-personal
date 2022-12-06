@@ -3,15 +3,13 @@ import { onValue } from "firebase/database";
 import { useEffect, useState } from "react";
 import { retrieveFavouriteVerses } from "../firebase";
 
-
-export function Favourites({setDisplayCards}){
+export function Favourites({ setDisplayCards }) {
   const [verses, setVerses] = useState([]);
-
+  setDisplayCards(true);
   useEffect(() => {
-    setDisplayCards(true);
     onValue(retrieveFavouriteVerses(), (snapshot) => {
       const newMessages = [];
-      
+
       snapshot.forEach((childSnapshot) => {
         newMessages.push(childSnapshot.val());
       });
@@ -31,31 +29,35 @@ export function Favourites({setDisplayCards}){
           p: 4,
         }}
       >
-        {verses.map((favourite, index) => (
-          <>
-            <h3>
-              {favourite.book} {favourite.chapter}
-            </h3>
-            <Divider />
-            <p
-              style={{
-                textAlign: "left",
-                margin: "0px",
-                paddingTop: "10px",
-                paddingBottom: "10px",
-                fontSize: "12px",
-              }}
-              key={index}
-            >
-              <sup>
-                <b>{favourite.verse}</b>
-              </sup>
-              {favourite.text}
-            </p>
+        {verses.length === 0 ? (
+          <p>You have no favourite verses! Go find some!</p>
+        ) : (
+          verses.map((favourite, index) => (
+            <>
+              <h3>
+                {favourite.book} {favourite.chapter}
+              </h3>
+              <Divider />
+              <p
+                style={{
+                  textAlign: "left",
+                  margin: "0px",
+                  paddingTop: "10px",
+                  paddingBottom: "10px",
+                  fontSize: "12px",
+                }}
+                key={index}
+              >
+                <sup>
+                  <b>{favourite.verse}</b>
+                </sup>
+                {favourite.text}
+              </p>
 
-            <br />
-          </>
-        ))}
+              <br />
+            </>
+          ))
+        )}
       </Paper>
     </div>
   );

@@ -13,7 +13,7 @@ import {
   Select,
   Tooltip,
 } from "@mui/material";
-import { versesCount } from "../bible_versions/verses";
+import { versesCount } from "../bibleverses/verses";
 
 //Author of npm library: bricejlin (holy bible text) KJV and ASV only
 import bible from "holy-bible";
@@ -27,7 +27,7 @@ import { EachVerse } from "./EachVerse";
 // let bcv_parser = require("bible-passage-reference-parser/js/en_bcv_parser").bcv_parser;
 // let bcv = new bcv_parser;
 
-export function DisplayVerses({setDisplayCards}) {
+export function DisplayVerses({ setDisplayCards }) {
   const [version, setVersion] = useState("KJV");
   const [book, setBook] = useState("Genesis");
   const [chapter, setChapter] = useState(1);
@@ -35,6 +35,8 @@ export function DisplayVerses({setDisplayCards}) {
   const [printText, setPrintText] = useState([]);
   const [input, setInput] = useState("");
   const [typo, setTypo] = useState(false);
+
+  setDisplayCards(true);
 
   const formatVerse = (verseNumber, text) => `${verseNumber} ${text}`;
 
@@ -56,7 +58,7 @@ export function DisplayVerses({setDisplayCards}) {
           return text;
         })
       );
-    
+
       verses.forEach((verse, index) =>
         newPrintText.push(formatVerse(index + 1, verse))
       );
@@ -80,15 +82,14 @@ export function DisplayVerses({setDisplayCards}) {
   };
 
   const checkTypo = () => {
-    if(input === input.toLowerCase()){
+    if (input === input.toLowerCase()) {
       setTypo(true);
     } else {
       setTypo(false);
     }
-  }
+  };
 
   useEffect(() => {
-    setDisplayCards(true);
     fetchVerses();
   }, [fetchVerses]);
 
@@ -117,7 +118,19 @@ export function DisplayVerses({setDisplayCards}) {
           variant="outlined"
           helperText="Search in this format: 1 John.3 (book.chapter), or 1 John.3.1 (book.chapter.verse)"
         />
-        {typo && <p style={{color: "red", fontSize: "12px", margin: "0", paddingLeft: "40px", width: "100%"}}>Ensure that you follow the format strictly without typos!</p>}
+        {typo && (
+          <p
+            style={{
+              color: "red",
+              fontSize: "12px",
+              margin: "0",
+              paddingLeft: "40px",
+              width: "100%",
+            }}
+          >
+            Ensure that you follow the format strictly without typos!
+          </p>
+        )}
         <FormControl>
           <InputLabel id="demo-simple-select-label">Bible version</InputLabel>
           <Select
@@ -156,12 +169,19 @@ export function DisplayVerses({setDisplayCards}) {
           p: 4,
         }}
       >
-        <h3 style={{textTransform: "capitalize"}}>
+        <h3 style={{ textTransform: "capitalize" }}>
           {book} {chapter}
         </h3>
         <Divider />
         {printText.map((text, index) => (
-          <EachVerse key={index} text={text} index={index} book={book} chapter={chapter} verse={verse}/>
+          <EachVerse
+            key={index}
+            text={text}
+            index={index}
+            book={book}
+            chapter={chapter}
+            verse={verse}
+          />
         ))}
       </Paper>
     </Paper>

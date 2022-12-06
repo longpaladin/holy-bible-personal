@@ -1,6 +1,6 @@
 import { Divider, Paper } from "@mui/material";
 import { useEffect, useState } from "react";
-import { versesCount } from "../bible_versions/verses";
+import { versesCount } from "../bibleverses/verses";
 
 //Author of npm library: bricejlin (holy bible text) KJV and ASV only
 var bible = require("holy-bible");
@@ -42,8 +42,8 @@ export function PsalmOfTheDay() {
   }
 
   useEffect(() => {
-      getVersesCount();
-      getBibleVerses();
+    getVersesCount();
+    getBibleVerses();
   }, [book, chapter, versesInChapter]);
 
   return (
