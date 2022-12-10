@@ -86,15 +86,13 @@ firebase push (unique ID for each user), to favourite verses
 click card to navigate to studying pages, with dummy fixed content
 fix invalid search input
 snackbar animation for clicking on verse to save as favourite
-
+spinner at login page
+add delete button to favourites
 
 Things to do:
 
-skeleton - when loading verses
-spinners
-
 fix duplicates in favourites
-add delete button to favourites
+
 
 
 refactor code

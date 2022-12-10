@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-// import { Reference } from "biblejs";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -18,14 +17,8 @@ import { versesCount } from "../bibleverses/verses";
 //Author of npm library: bricejlin (holy bible text) KJV and ASV only
 import bible from "holy-bible";
 import { EachVerse } from "./EachVerse";
-
-//Author of npm library: davewasmer (parser reference), useless because I cannot get the number of verses per chapter of different books
-// const Bible = require("biblejs");
-// let Reference = Bible.Reference;
-
-//Author of npm library: openbibleinfo, very difficult to understand, and it's just a parser, not the biblical text
-// let bcv_parser = require("bible-passage-reference-parser/js/en_bcv_parser").bcv_parser;
-// let bcv = new bcv_parser;
+import { get, onValue } from "firebase/database";
+import { retrieveFavouriteVerses } from "../firebase";
 
 export function DisplayVerses({ setDisplayCards }) {
   const [version, setVersion] = useState("KJV");
@@ -35,6 +28,7 @@ export function DisplayVerses({ setDisplayCards }) {
   const [printText, setPrintText] = useState([]);
   const [input, setInput] = useState("");
   const [typo, setTypo] = useState(false);
+  const [updateFavourites, setUpdateFavourites] = useState([]);
 
   setDisplayCards(true);
 
@@ -92,6 +86,22 @@ export function DisplayVerses({ setDisplayCards }) {
   useEffect(() => {
     fetchVerses();
   }, [fetchVerses]);
+
+  useEffect(() => {
+    
+    onValue(retrieveFavouriteVerses(), (snapshot) => {
+      setUpdateFavourites([]);
+      if (snapshot){
+        snapshot.forEach((childSnapshot) => {
+          setUpdateFavourites((updateFavourites) => [
+            ...updateFavourites,
+            childSnapshot.val(),
+          ]);
+        });
+      }
+        
+    });
+  }, []);
 
   return (
     <Paper
@@ -181,6 +191,8 @@ export function DisplayVerses({ setDisplayCards }) {
             book={book}
             chapter={chapter}
             verse={verse}
+            updateFavourites={updateFavourites}
+            setUpdateFavourites={setUpdateFavourites}
           />
         ))}
       </Paper>

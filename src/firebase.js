@@ -35,3 +35,9 @@ export function retrieveFavouriteVerses(){
     const result = ref(database, 'favourites/' + myUserId);
     return result;
 }
+
+export function deleteVerse(uniqueId){
+  const myUserId = auth.currentUser.uid;
+  const result = ref(database, "favourites/" + myUserId + "/" + uniqueId);
+  return result;
+}

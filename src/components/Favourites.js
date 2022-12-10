@@ -2,20 +2,24 @@ import { Divider, Paper } from "@mui/material";
 import { onValue } from "firebase/database";
 import { useEffect, useState } from "react";
 import { retrieveFavouriteVerses } from "../firebase";
+import { DeleteFavouriteVerse } from "./DeleteFavouriteVerse";
 
 export function Favourites({ setDisplayCards }) {
   const [verses, setVerses] = useState([]);
   setDisplayCards(true);
+
   useEffect(() => {
     onValue(retrieveFavouriteVerses(), (snapshot) => {
       const newMessages = [];
-
       snapshot.forEach((childSnapshot) => {
         newMessages.push(childSnapshot.val());
+        
       });
       setVerses(newMessages);
     });
   }, []);
+
+
 
   return (
     <div>
@@ -35,8 +39,9 @@ export function Favourites({ setDisplayCards }) {
           verses.map((favourite, index) => (
             <>
               <h3>
-                {favourite.book} {favourite.chapter}
+                {favourite.book} {favourite.chapter} <DeleteFavouriteVerse favourite={favourite}/>
               </h3>
+              
               <Divider />
               <p
                 style={{
