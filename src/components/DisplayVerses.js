@@ -29,14 +29,49 @@ export function DisplayVerses({ setDisplayCards }) {
   const [input, setInput] = useState("");
   const [typo, setTypo] = useState(false);
   const [updateFavourites, setUpdateFavourites] = useState([]);
+  const [isSearchInvalid, setIsSearchInvalid] = useState(false);
 
   setDisplayCards(true);
 
+  // Guided by instructor Min Shan (angrylobster)
   const formatVerse = (verseNumber, text) => `${verseNumber} ${text}`;
 
   const fetchVerses = useCallback(async () => {
-    if (!book || !chapter || !version) return;
+    // Check for empty input field
+    if (!book || !chapter || !version) {
+      setIsSearchInvalid(true);
+      return;
+    }
 
+    // Check for non existent bible book
+    const booksInBible = Object.keys(versesCount);
+    let bookFound = false;
+    for(let i = 0; i < booksInBible.length; i++){
+      if (book === booksInBible[i]){
+        bookFound = true;
+      }
+    }
+    if (bookFound === false) {
+      setIsSearchInvalid(true);
+      return;
+    }
+
+    // Check for out of range bible chapter
+    if (chapter > versesCount[book].length){
+      setIsSearchInvalid(true);
+      return;
+    }
+
+    // Check for out of range bible verses
+    if (verse){
+      if (verse > versesCount[book][chapter - 1]){
+        setIsSearchInvalid(true);
+        return;
+      }
+    }
+
+    // Since everything above is correct, run code to get bible verses
+    setIsSearchInvalid(false);
     const newPrintText = [];
     if (verse) {
       const { text } = await bible.get(`${book}.${chapter}.${verse}`, version);
@@ -88,10 +123,9 @@ export function DisplayVerses({ setDisplayCards }) {
   }, [fetchVerses]);
 
   useEffect(() => {
-    
     onValue(retrieveFavouriteVerses(), (snapshot) => {
       setUpdateFavourites([]);
-      if (snapshot){
+      if (snapshot) {
         snapshot.forEach((childSnapshot) => {
           setUpdateFavourites((updateFavourites) => [
             ...updateFavourites,
@@ -99,7 +133,6 @@ export function DisplayVerses({ setDisplayCards }) {
           ]);
         });
       }
-        
     });
   }, []);
 
@@ -126,7 +159,7 @@ export function DisplayVerses({ setDisplayCards }) {
           id="outlined-basic"
           label="Search"
           variant="outlined"
-          helperText="Search in this format: 1 John.3 (book.chapter), or 1 John.3.1 (book.chapter.verse)"
+          helperText="Search in this format: 1 John.3 (book.chapter), or 1 John.3.1 (book.chapter.verse). Click on any verse while reading to favourite it!"
         />
         {typo && (
           <p
@@ -179,22 +212,28 @@ export function DisplayVerses({ setDisplayCards }) {
           p: 4,
         }}
       >
-        <h3 style={{ textTransform: "capitalize" }}>
-          {book} {chapter}
-        </h3>
-        <Divider />
-        {printText.map((text, index) => (
-          <EachVerse
-            key={index}
-            text={text}
-            index={index}
-            book={book}
-            chapter={chapter}
-            verse={verse}
-            updateFavourites={updateFavourites}
-            setUpdateFavourites={setUpdateFavourites}
-          />
-        ))}
+        {isSearchInvalid ? (
+          <h3 style={{ textTransform: "capitalize" }}>Search is invalid. Try again.</h3>
+        ) : (
+          <>
+            <h3 style={{ textTransform: "capitalize" }}>
+              {book} {chapter}
+            </h3>
+            <Divider />
+            {printText.map((text, index) => (
+              <EachVerse
+                key={index}
+                text={text}
+                index={index}
+                book={book}
+                chapter={chapter}
+                verse={verse}
+                updateFavourites={updateFavourites}
+                setUpdateFavourites={setUpdateFavourites}
+              />
+            ))}
+          </>
+        )}
       </Paper>
     </Paper>
   );

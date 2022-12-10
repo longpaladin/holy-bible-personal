@@ -46,10 +46,32 @@ export function PsalmOfTheDay() {
     getBibleVerses();
   }, [book, chapter, versesInChapter]);
 
+  const changeBackgroundColor = (e) => {
+    e.target.style.background = "#385779";
+    e.target.style.color = "white";
+    e.target.style.transform = "scale(1.01)";
+    e.target.style.fontSize = "14px";
+    e.target.style.borderRadius = "10px";
+    e.target.style.paddingLeft = "10px";
+  };
+
+  const changeToOriginal = (e) => {
+    e.target.style.background = "white";
+    e.target.style.color = "black";
+    e.target.style.transform = "scale(1)";
+    e.target.style.fontSize = "12px";
+    e.target.style.borderRadius = "0px";
+    e.target.style.paddingLeft = "0px";
+  };
+
   return (
     <Paper
       elevation={0}
-      sx={{ minHeight: "100vh", backgroundColor: "rgba(211,211,211,0.2)" }}
+      sx={{
+        minHeight: "100vh",
+        backgroundColor: "rgba(211,211,211,0.2)",
+        minWidth: "80vw",
+      }}
     >
       <Paper
         elevation={6}
@@ -72,8 +94,11 @@ export function PsalmOfTheDay() {
               paddingTop: "10px",
               paddingBottom: "10px",
               fontSize: "12px",
+              transition: "all 0.5s ease-out",
             }}
             key={index}
+            onMouseOver={changeBackgroundColor}
+            onMouseLeave={changeToOriginal}
           >
             <sup>
               <b>{text.slice(0, text.indexOf(" "))}</b>

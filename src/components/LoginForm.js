@@ -16,6 +16,8 @@ export function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [wrongPassword, setWrongPassword] = useState(false);
+  const [userNotFound, setUserNotFound] = useState(false);
 
     const loginUser = (e, email, password) => {
       e.preventDefault();
@@ -24,7 +26,15 @@ export function LoginForm() {
           console.log(user);
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.code);
+          if (error.code === "auth/wrong-password") {
+            setIsLoading(false);
+            setWrongPassword(true);
+          }
+          if (error.code === "auth/user-not-found") {
+            setIsLoading(false);
+            setUserNotFound(true);
+          }
         });
     };
 
@@ -49,6 +59,8 @@ export function LoginForm() {
           onSubmit={(e) => {
             loginUser(e, email, password);
             setIsLoading(true);
+            setWrongPassword(false);
+            setUserNotFound(false);
           }}
         >
           <TextField
@@ -90,6 +102,12 @@ export function LoginForm() {
             </Button>
           </Tooltip>
         </Box>
+        {wrongPassword && (
+          <p style={{ color: "red" }}>Wrong password. Please try again.</p>
+        )}
+        {userNotFound && (
+          <p style={{ color: "red" }}>User does not exist. Please create an account.</p>
+        )}
       </Box>
     </Paper>
   );

@@ -58,7 +58,6 @@ export function EachVerse({
           updateFavourites[i].chapter === chapter &&
           updateFavourites[i].verse === text.slice(0, text.indexOf(" "))
         ) {
-          console.log("duplicate caught");
           setDuplicateState(true);
           setDuplicateOpen(true);
           isDuplicated = true;
@@ -67,7 +66,6 @@ export function EachVerse({
     }
 
     if (!isDuplicated) {
-      console.log("duplicate not caught");
       setOpen(true);
 
       favouriteVerses({

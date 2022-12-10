@@ -2,20 +2,16 @@ import * as React from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import Box from "@mui/material/Box";
-import {
-  Button,
-  Paper,
-  TextField,
-  Tooltip,
-} from "@mui/material";
+import { Button, Paper, TextField, Tooltip } from "@mui/material";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
-import {auth} from "../firebase";
+import { auth } from "../firebase";
 import CircularProgress from "@mui/material/CircularProgress";
 
 export function NewUserForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [newUserExist, setNewUserExist] = useState(false);
 
   function createUser(e, email, password) {
     e.preventDefault();
@@ -24,7 +20,11 @@ export function NewUserForm() {
         console.log(user);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.code)
+        if (error.code === "auth/email-already-in-use") {
+          setIsLoading(false);
+          setNewUserExist(true);
+        }
       });
   }
 
@@ -49,6 +49,7 @@ export function NewUserForm() {
           onSubmit={(e) => {
             createUser(e, email, password);
             setIsLoading(true);
+            setNewUserExist(false);
           }}
         >
           <TextField
@@ -69,7 +70,7 @@ export function NewUserForm() {
             sx={{ width: "60%", m: 1 }}
           />
 
-          <Tooltip title="Login">
+          <Tooltip title="Create account">
             <Button
               size="large"
               variant="contained"
@@ -90,6 +91,9 @@ export function NewUserForm() {
             </Button>
           </Tooltip>
         </Box>
+        {newUserExist && (
+          <p style={{ color: "red" }}>User/email already exist. Please try another email.</p>
+        )}
       </Box>
     </Paper>
   );

@@ -20,7 +20,7 @@ export function LogoutTab() {
       </ListItemIcon>
       <ListItemText
         primary="Logout"
-        primaryTypographyProps={{ fontSize: "12px" }}
+        primaryTypographyProps={{ fontSize: "14px" }}
       />
     </ListItemButton>
   );

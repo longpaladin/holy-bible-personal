@@ -69,7 +69,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-
 Done:
 install router
 install axios ???need???
@@ -81,19 +80,18 @@ create firebase project
 create realtime database (favourite verses)
 create storage (for photos), resized
 firebase auth - login and logout smoothly
-psalm of the day
+psalm of the day - when there is no login
 firebase push (unique ID for each user), to favourite verses
 click card to navigate to studying pages, with dummy fixed content
-fix invalid search input
+fixed invalid search input
 snackbar animation for clicking on verse to save as favourite
 spinner at login page
 add delete button to favourites
+fixed duplicates in favourites
+improved aesthetics and UX
+show error in new user if user exist
+show error in login if password wrong or user dont exist
 
 Things to do:
-
-fix duplicates in favourites
-
-
-
 refactor code
 learn figma

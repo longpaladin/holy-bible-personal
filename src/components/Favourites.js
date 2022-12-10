@@ -22,7 +22,7 @@ export function Favourites({ setDisplayCards }) {
 
 
   return (
-    <div>
+    <div style={{ width: "75vw" }}>
       <h2 style={{ padding: "30px" }}>Your favourite verses</h2>
       <Paper
         elevation={6}
@@ -31,6 +31,7 @@ export function Favourites({ setDisplayCards }) {
           maxHeight: "70vh",
           overflow: "auto",
           p: 4,
+          width: "100%"
         }}
       >
         {verses.length === 0 ? (
