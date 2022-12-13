@@ -93,5 +93,6 @@ show error in new user if user exist
 show error in login if password wrong or user dont exist
 
 Things to do:
-refactor code
-learn figma
+add in comments to code
+add in readme on how to use bible app
+

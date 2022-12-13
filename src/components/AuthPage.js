@@ -3,20 +3,17 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import {
-  List,
-} from "@mui/material";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import PersonIcon from "@mui/icons-material/Person";
 import { Navigate, Outlet } from "react-router-dom";
 import { NavBarTab } from "./NavBarTab";
-import logo from "../images/holybible_logo.png"
+import logo from "../images/holybible_logo.png";
 
 export function AuthPage({ user }) {
-  if (user){
-    return <Navigate to="readthebible" />
-  } 
-  
+  if (user) {
+    return <Navigate to="readthebible" />;
+  }
+
   return (
     <Box sx={{ display: "flex", flexDirection: "row" }}>
       <Box
@@ -39,24 +36,18 @@ export function AuthPage({ user }) {
               aria-label="menu"
               sx={{ m: 0, p: 0 }}
             >
-              <Box
-                component="img"
-                src={logo}
-                sx={{ maxWidth: "100%" }}
-              />
+              <Box component="img" src={logo} sx={{ maxWidth: "100%" }} />
             </IconButton>
-            <List sx={{ width: "100%" }}>
-              <NavBarTab
-                linkToPage="newuser"
-                icon={<PersonIcon sx={{ color: "white" }} />}
-                text="New User"
-              />
-              <NavBarTab
-                linkToPage="login"
-                icon={<LoginOutlinedIcon sx={{ color: "white" }} />}
-                text="Login"
-              />
-            </List>
+            <NavBarTab
+              linkToPage="newuser"
+              icon={<PersonIcon sx={{ color: "white" }} />}
+              text="New User"
+            />
+            <NavBarTab
+              linkToPage="login"
+              icon={<LoginOutlinedIcon sx={{ color: "white" }} />}
+              text="Login"
+            />
           </Toolbar>
         </AppBar>
       </Box>

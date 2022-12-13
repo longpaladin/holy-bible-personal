@@ -3,8 +3,6 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import { List } from "@mui/material";
-
 import { Navigate, Outlet } from "react-router-dom";
 import { NavBarTab } from "./NavBarTab";
 import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
@@ -15,7 +13,7 @@ import { LogoutTab } from "./LogoutTab";
 
 export function HomePage({ user }) {
   if (!user) {
-    return <Navigate to="psalm-of-the-day" />;
+    return <Navigate to="/" />;
   }
 
   return (
@@ -42,26 +40,22 @@ export function HomePage({ user }) {
             >
               <Box component="img" src={logo} sx={{ maxWidth: "100%" }} />
             </IconButton>
-            <List sx={{ width: "100%" }}>
-              <NavBarTab
-                linkToPage="readthebible"
-                icon={<MenuBookOutlinedIcon sx={{ color: "white" }} />}
-                text="Read the bible"
-              />
-              <NavBarTab
-                linkToPage="studybybooks"
-                icon={
-                  <CollectionsBookmarkOutlinedIcon sx={{ color: "white" }} />
-                }
-                text="Study by books"
-              />
-              <NavBarTab
-                linkToPage="favourites"
-                icon={<ThumbUpIcon sx={{ color: "white" }} />}
-                text="Favourites"
-              />
-              <LogoutTab />
-            </List>
+            <NavBarTab
+              linkToPage="readthebible"
+              icon={<MenuBookOutlinedIcon sx={{ color: "white" }} />}
+              text="Read the bible"
+            />
+            <NavBarTab
+              linkToPage="studybybooks"
+              icon={<CollectionsBookmarkOutlinedIcon sx={{ color: "white" }} />}
+              text="Study by books"
+            />
+            <NavBarTab
+              linkToPage="favourites"
+              icon={<ThumbUpIcon sx={{ color: "white" }} />}
+              text="Favourites"
+            />
+            <LogoutTab />
           </Toolbar>
         </AppBar>
       </Box>

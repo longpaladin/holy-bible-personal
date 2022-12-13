@@ -18,6 +18,7 @@ export function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [wrongPassword, setWrongPassword] = useState(false);
   const [userNotFound, setUserNotFound] = useState(false);
+  const [invalidEmail, setInvalidEmail] = useState(false);
 
     const loginUser = (e, email, password) => {
       e.preventDefault();
@@ -35,15 +36,23 @@ export function LoginForm() {
             setIsLoading(false);
             setUserNotFound(true);
           }
+          if (error.code === "auth/invalid-email") {
+            setIsLoading(false);
+            setInvalidEmail(true);
+          }
         });
     };
 
   return (
     <Paper
       elevation={0}
-      sx={{ minHeight: "100vh", backgroundColor: "rgba(211,211,211,0.2)" }}
+      sx={{
+        minHeight: "100vh",
+        backgroundColor: "rgba(211,211,211,0.2)",
+        minWidth: "80vw",
+      }}
     >
-      <Box sx={{ textAlign: "center", float: "left", width: "70%", mt: 20 }}>
+      <Box sx={{ textAlign: "center", float: "left", width: "100%", mt: 20 }}>
         <Box component="h1" sx={{ mb: 4 }}>
           Login
         </Box>
@@ -66,7 +75,7 @@ export function LoginForm() {
           <TextField
             onChange={(e) => setEmail(e.target.value)}
             size="small"
-            id="outlined-basic"
+            id="login-email"
             label="Email"
             variant="outlined"
             sx={{ width: "60%", m: 1 }}
@@ -75,7 +84,7 @@ export function LoginForm() {
             onChange={(e) => setPassword(e.target.value)}
             type="password"
             size="small"
-            id="outlined-basic"
+            id="login-password"
             label="Password"
             variant="outlined"
             sx={{ width: "60%", m: 1 }}
@@ -106,7 +115,12 @@ export function LoginForm() {
           <p style={{ color: "red" }}>Wrong password. Please try again.</p>
         )}
         {userNotFound && (
-          <p style={{ color: "red" }}>User does not exist. Please create an account.</p>
+          <p style={{ color: "red" }}>
+            User does not exist. Please create an account.
+          </p>
+        )}
+        {invalidEmail && (
+          <p style={{ color: "red" }}>Invalid email. Please try again.</p>
         )}
       </Box>
     </Paper>

@@ -30,7 +30,7 @@ export default function App() {
         {/* Before login */}
         <Routes>
           <Route path="/" element={<AuthPage user={user} />}>
-            <Route path="psalm-of-the-day" element={<PsalmOfTheDay />} />
+            <Route path="/" element={<PsalmOfTheDay />} />
             <Route path="newuser" element={<NewUserForm user={user} />} />
             <Route path="login" element={<LoginForm user={user} />} />
           </Route>

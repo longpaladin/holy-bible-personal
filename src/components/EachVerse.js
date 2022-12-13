@@ -1,9 +1,8 @@
-import { favouriteVerses, retrieveFavouriteVerses } from "../firebase";
-import { forwardRef, useEffect, useState } from "react";
+import { favouriteVerses } from "../firebase";
+import { forwardRef, useState } from "react";
 
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import { get } from "firebase/database";
 
 const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;

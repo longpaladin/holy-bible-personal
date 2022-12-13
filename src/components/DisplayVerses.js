@@ -17,7 +17,7 @@ import { versesCount } from "../bibleverses/verses";
 //Author of npm library: bricejlin (holy bible text) KJV and ASV only
 import bible from "holy-bible";
 import { EachVerse } from "./EachVerse";
-import { get, onValue } from "firebase/database";
+import { onValue } from "firebase/database";
 import { retrieveFavouriteVerses } from "../firebase";
 
 export function DisplayVerses({ setDisplayCards }) {

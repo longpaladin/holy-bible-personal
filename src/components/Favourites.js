@@ -1,11 +1,17 @@
-import { Divider, Paper } from "@mui/material";
+import { Divider, Paper, Snackbar } from "@mui/material";
 import { onValue } from "firebase/database";
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { retrieveFavouriteVerses } from "../firebase";
 import { DeleteFavouriteVerse } from "./DeleteFavouriteVerse";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 export function Favourites({ setDisplayCards }) {
   const [verses, setVerses] = useState([]);
+  const [open, setOpen] = useState(false);
   setDisplayCards(true);
 
   useEffect(() => {
@@ -13,13 +19,18 @@ export function Favourites({ setDisplayCards }) {
       const newMessages = [];
       snapshot.forEach((childSnapshot) => {
         newMessages.push(childSnapshot.val());
-        
       });
       setVerses(newMessages);
     });
   }, []);
 
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
+    setOpen(false);
+  };
 
   return (
     <div style={{ width: "75vw" }}>
@@ -31,18 +42,26 @@ export function Favourites({ setDisplayCards }) {
           maxHeight: "70vh",
           overflow: "auto",
           p: 4,
-          width: "100%"
+          width: "100%",
         }}
       >
         {verses.length === 0 ? (
           <p>You have no favourite verses! Go find some!</p>
         ) : (
-          verses.map((favourite, index) => (
-            <>
+          verses.map((favourite) => (
+            <div
+              key={`${favourite.book}.${favourite.chapter}.${favourite.verse}`}
+            >
               <h3>
-                {favourite.book} {favourite.chapter} <DeleteFavouriteVerse favourite={favourite}/>
+                {favourite.book} {favourite.chapter}{" "}
+                <DeleteFavouriteVerse
+                  favourite={favourite}
+                  displayDeleteSnackbar={() => {
+                    setOpen(true);
+                  }}
+                />
               </h3>
-              
+
               <Divider />
               <p
                 style={{
@@ -52,7 +71,6 @@ export function Favourites({ setDisplayCards }) {
                   paddingBottom: "10px",
                   fontSize: "12px",
                 }}
-                key={index}
               >
                 <sup>
                   <b>{favourite.verse}</b>
@@ -61,10 +79,15 @@ export function Favourites({ setDisplayCards }) {
               </p>
 
               <br />
-            </>
+            </div>
           ))
         )}
       </Paper>
+      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+          Verse deleted!
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

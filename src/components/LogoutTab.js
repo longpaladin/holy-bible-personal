@@ -1,4 +1,5 @@
 import {
+  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
@@ -9,19 +10,21 @@ import { auth } from "../firebase";
 
 export function LogoutTab() {
   return (
-    <ListItemButton
-      sx={{
-        "&:hover": { backgroundColor: "#385779" },
-      }}
-      onClick={() => signOut(auth)}
-    >
-      <ListItemIcon>
-        <LogoutOutlinedIcon sx={{ color: "white" }} />
-      </ListItemIcon>
-      <ListItemText
-        primary="Logout"
-        primaryTypographyProps={{ fontSize: "14px" }}
-      />
-    </ListItemButton>
+    <ListItem disablePadding>
+      <ListItemButton
+        sx={{
+          "&:hover": { backgroundColor: "#385779" },
+        }}
+        onClick={() => signOut(auth)}
+      >
+        <ListItemIcon>
+          <LogoutOutlinedIcon sx={{ color: "white" }} />
+        </ListItemIcon>
+        <ListItemText
+          primary="Logout"
+          primaryTypographyProps={{ fontSize: "14px" }}
+        />
+      </ListItemButton>
+    </ListItem>
   );
 }

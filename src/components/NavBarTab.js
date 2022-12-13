@@ -17,6 +17,8 @@ export function NavBarTab({ linkToPage, icon, text }) {
           color: "white",
           fontStyle: isActive ? "italic" : "normal",
           textTransform: isActive ? "uppercase" : "none",
+          background: isActive ? "#385779" : "",
+          width: "100%",
         };
       }}
     >
