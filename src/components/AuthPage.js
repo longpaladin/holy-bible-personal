@@ -19,7 +19,7 @@ export function AuthPage({ user }) {
       <Box
         sx={{
           flexGrow: 1,
-          minWidth: "150px",
+          minWidth: "20vw",
           maxWidth: "20vw",
           float: "left",
         }}

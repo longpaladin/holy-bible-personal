@@ -13,6 +13,7 @@ export function NewUserForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [newUserExist, setNewUserExist] = useState(false);
   const [invalidEmail, setInvalidEmail] = useState(false);
+  const [weakPassword, setWeakPassword] = useState(false);
 
   function createUser(e, email, password) {
     e.preventDefault();
@@ -30,13 +31,21 @@ export function NewUserForm() {
             setIsLoading(false);
             setInvalidEmail(true);
           }
+          if (error.code === "auth/weak-password"){
+            setIsLoading(false);
+            setWeakPassword(true);
+          }
       });
   }
 
   return (
     <Paper
       elevation={0}
-      sx={{ minHeight: "100vh", backgroundColor: "rgba(211,211,211,0.2)", minWidth: "80vw", }}
+      sx={{
+        minHeight: "100vh",
+        backgroundColor: "rgba(211,211,211,0.2)",
+        minWidth: "80vw",
+      }}
     >
       <Box sx={{ textAlign: "center", float: "left", width: "100%", mt: 20 }}>
         <Box component="h1" sx={{ mb: 4 }}>
@@ -97,10 +106,15 @@ export function NewUserForm() {
           </Tooltip>
         </Box>
         {newUserExist && (
-          <p style={{ color: "red" }}>User/email already exist. Please try another email.</p>
+          <p style={{ color: "red" }}>
+            User/email already exist. Please try another email.
+          </p>
         )}
         {invalidEmail && (
           <p style={{ color: "red" }}>Invalid email. Please try again.</p>
+        )}
+        {weakPassword && (
+          <p style={{ color: "red" }}>Weak password. Please use at least 6 characters, mix letters, numbers together.</p>
         )}
       </Box>
     </Paper>
